@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "8ad00666ce58b62f7753c6e6066ff538",
+    "revision": "8bd0532b5152ce2584dbe1d51400c5b4",
     "url": "/MusicShop/index.html"
   },
   {
-    "revision": "1d6f0df8152ffe0e0514",
-    "url": "/MusicShop/static/css/main.ac032fb3.chunk.css"
+    "revision": "a17527a96df2e91f0131",
+    "url": "/MusicShop/static/css/main.c6112a14.chunk.css"
   },
   {
     "revision": "002bdead1ad66f744f42",
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/MusicShop/static/js/2.027c21b3.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "1d6f0df8152ffe0e0514",
-    "url": "/MusicShop/static/js/main.51f213c6.chunk.js"
+    "revision": "a17527a96df2e91f0131",
+    "url": "/MusicShop/static/js/main.f4558bcf.chunk.js"
   },
   {
     "revision": "4c963d5f58a591a916c9",

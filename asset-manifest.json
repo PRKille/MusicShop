@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/MusicShop/static/css/main.ac032fb3.chunk.css",
-    "main.js": "/MusicShop/static/js/main.51f213c6.chunk.js",
-    "main.js.map": "/MusicShop/static/js/main.51f213c6.chunk.js.map",
+    "main.css": "/MusicShop/static/css/main.c6112a14.chunk.css",
+    "main.js": "/MusicShop/static/js/main.f4558bcf.chunk.js",
+    "main.js.map": "/MusicShop/static/js/main.f4558bcf.chunk.js.map",
     "runtime-main.js": "/MusicShop/static/js/runtime-main.ae291390.js",
     "runtime-main.js.map": "/MusicShop/static/js/runtime-main.ae291390.js.map",
     "static/js/2.027c21b3.chunk.js": "/MusicShop/static/js/2.027c21b3.chunk.js",
     "static/js/2.027c21b3.chunk.js.map": "/MusicShop/static/js/2.027c21b3.chunk.js.map",
     "index.html": "/MusicShop/index.html",
-    "precache-manifest.a0eea65e3f9b907fda05c1b051bc6c86.js": "/MusicShop/precache-manifest.a0eea65e3f9b907fda05c1b051bc6c86.js",
+    "precache-manifest.22695a12b04abaa7bb206ab653197b01.js": "/MusicShop/precache-manifest.22695a12b04abaa7bb206ab653197b01.js",
     "service-worker.js": "/MusicShop/service-worker.js",
-    "static/css/main.ac032fb3.chunk.css.map": "/MusicShop/static/css/main.ac032fb3.chunk.css.map",
+    "static/css/main.c6112a14.chunk.css.map": "/MusicShop/static/css/main.c6112a14.chunk.css.map",
     "static/js/2.027c21b3.chunk.js.LICENSE.txt": "/MusicShop/static/js/2.027c21b3.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.ae291390.js",
     "static/js/2.027c21b3.chunk.js",
-    "static/css/main.ac032fb3.chunk.css",
-    "static/js/main.51f213c6.chunk.js"
+    "static/css/main.c6112a14.chunk.css",
+    "static/js/main.f4558bcf.chunk.js"
   ]
 }
