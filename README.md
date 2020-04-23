@@ -5,7 +5,7 @@
 #### _**Jamison Cozart, Patrick Kille, Drake Wilcox**_
 
 _Component structure:_
-![component structure](/)
+![component structure](./MusicShopCompTree.jpg)
 
 ## Setup/Installation Requirements
 
