@@ -14,65 +14,13 @@ class App extends React.Component {
     this.state = {
       showHomePage: true,
       showShoppingCart: false,
-      // albumList: [
-      //   {
-      //     title: "Dark Side of the Moon",
-      //     artist: "Pink Floyd",
-      //     image: "https://miro.medium.com/max/2480/1*8FkvzbSdSJ4HNxtuZo5kLg.jpeg",
-      //     description: "An amazing album!",
-      //     inventory: 9,
-      //     id: "42066691"
-      //   },
-      //   {
-      //     title: "City To City",
-      //     artist: "Gerry Rafferty",
-      //     image: "https://upload.wikimedia.org/wikipedia/en/9/9a/Citytocity.jpg",
-      //     description: "An amazing album!",
-      //     inventory: 9,
-      //     id: "42066692"
-      //   },
-      //   {
-      //     title: "Blondes Have More Fun",
-      //     artist: "Rod Stewart",
-      //     image:
-      //       "https://upload.wikimedia.org/wikipedia/en/3/35/Rod_Stewart_-_Blondes_Have_More_Fun_%28album_cover%29.jpg",
-      //     description: "An amazing album!",
-      //     inventory: 9,
-      //     id: "42066693"
-      //   },
-      //   {
-      //     title: "Africa",
-      //     artist: "TOTO",
-      //     image: "https://cdn-s3.allmusic.com/release-covers/500/0000/866/0000866482.jpg",
-      //     description: "An amazing album!",
-      //     inventory: 9,
-      //     id: "42066694"
-      //   },
-      //   {
-      //     title: "Can't Buy A Thrill",
-      //     artist: "Steely Dan",
-      //     image: "https://upload.wikimedia.org/wikipedia/en/b/b2/Cant_buy_a_tcant_buy_a_thrill.jpg",
-      //     description: "An amazing album!",
-      //     inventory: 9,
-      //     id: "42066695"
-      //   },
-      //   {
-      //     title: "Careless Whisper",
-      //     artist: "George Michael",
-      //     image:
-      //       "https://img.discogs.com/j_OGjQLde9lJ7Om9Pd6gVHtuIpM=/fit-in/300x300/filters:strip_icc():format(jpeg):mode_rgb():quality(40)/discogs-images/R-1296467-1354892016-3591.jpeg.jpg",
-      //     description: "An amazing album!",
-      //     inventory: 9,
-      //     id: "42066696"
-      //   }
-      // ],
       currentSelectedAlbum: {},
       shoppingCartItems: []
     };
   }
 
   handleAlbumSelection = (id) => {
-    const selectedAlbum = this.state.albumList.filter((album) => album.id === id)[0];
+    const selectedAlbum = this.props.albumList[id];
     this.setState({
       currentSelectedAlbum: selectedAlbum,
       showHomePage: false
@@ -89,7 +37,7 @@ class App extends React.Component {
       artist: artist,
       image: image,
       description: description,
-      inventory: inventory
+      inventory: 0
     };
     dispatch(action);
   };
@@ -104,13 +52,14 @@ class App extends React.Component {
     //update inventory of album
     const { dispatch } = this.props;
     const { title, artist, image, description, inventory, id } = albumToEdit;
+    const newInventory = inventory - 1;
     const action = {
       type: "ADD_ALBUM",
       title: title,
       artist: artist,
       image: image,
       description: description,
-      inventory: inventory - 1,
+      inventory: newInventory,
       id: id
     };
     dispatch(action);
@@ -123,35 +72,42 @@ class App extends React.Component {
       shoppingCartItems: newShoppingCartItems,
       currentSelectedAlbum: updatedAlbum
     });
-
-    // const selectedAlbum = this.state.albumList.filter((album) => album.id === id)[0];
-    // const newShoppingCartItems = this.state.shoppingCartItems.concat(selectedAlbum);
-    // const newInventory = selectedAlbum.inventory - 1;
-    // const updatedAlbum = { ...selectedAlbum, inventory: newInventory };
-    // const oldAlbums = this.state.albumList.filter((album) => album.id !== id);
-    // this.setState({
-    //   shoppingCartItems: newShoppingCartItems,
-    //   albumList: [ ...oldAlbums, updatedAlbum ],
-    //   currentSelectedAlbum: updatedAlbum
-    // });
   };
 
-  handleAlbumRestock = (id) => {
-    const selectedAlbum = this.state.albumList.filter((album) => album.id === id)[0];
-    const newInventory = selectedAlbum.inventory + 1;
-    const updatedAlbum = { ...selectedAlbum, inventory: newInventory };
-    const oldAlbums = this.state.albumList.filter((album) => album.id !== id);
+  handleAlbumRestock = (albumToEdit) => {
+    //update inventory of album
+    const { dispatch } = this.props;
+    const thisAlbum = this.props.albumList[albumToEdit.id];
+    const { title, artist, image, description, inventory, id } = thisAlbum;
+
+    const newInventory = inventory + 1;
+
+    const action = {
+      type: "ADD_ALBUM",
+      title: title,
+      artist: artist,
+      image: image,
+      description: description,
+      inventory: newInventory,
+      id: id
+    };
+    dispatch(action);
+
+    //refreshes current album to reflect inventory change
+    const updatedAlbum = this.props.albumList[id];
+
     this.setState({
-      albumList: [ ...oldAlbums, updatedAlbum ],
       currentSelectedAlbum: updatedAlbum
     });
   };
 
   handleAlbumDelete = (id) => {
-    const updateAlbumsList = this.state.albumList.filter((album) => album.id !== id);
-    this.setState({
-      albumList: [ ...updateAlbumsList ]
-    });
+    const { dispatch } = this.props;
+    const action = {
+      type: "DELETE_ALBUM",
+      id: id
+    };
+    dispatch(action);
   };
 
   handleShowShoppingCart = () => {
@@ -160,6 +116,7 @@ class App extends React.Component {
     });
   };
 
+  //Rendering
   currentPage = () => {
     if (this.state.showShoppingCart) {
       return {
@@ -181,7 +138,7 @@ class App extends React.Component {
         ),
         body: (
           <MainAlbum
-            albums={this.state.albumList}
+            albums={this.props.albumList}
             onAlbumSelection={this.handleAlbumSelection}
             onNewAlbumCreation={this.handleAddingNewAlbum}
             handleAlbumDelete={this.handleAlbumDelete}
@@ -190,10 +147,15 @@ class App extends React.Component {
       };
     } else {
       return {
-        header: <AlbumHeader album={this.state.currentSelectedAlbum} handleBackToAlbums={this.handleBackToAlbums} />,
+        header: (
+          <AlbumHeader
+            album={this.props.albumList[this.state.currentSelectedAlbum.id]}
+            handleBackToAlbums={this.handleBackToAlbums}
+          />
+        ),
         body: (
           <AlbumDetails
-            album={this.state.currentSelectedAlbum}
+            album={this.props.albumList[this.state.currentSelectedAlbum.id]}
             onAlbumPurchase={this.handleAlbumPurchase}
             onAlbumRestock={this.handleAlbumRestock}
           />
