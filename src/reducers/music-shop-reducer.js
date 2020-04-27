@@ -14,7 +14,7 @@ export default (state = {}, action) => {
         }
       });
     case "DELETE_ALBUM":
-      const newState = {...state};
+      const newState = { ...state };
       delete newState[id];
       return newState;
     default:
